@@ -1,7 +1,10 @@
 import React from 'react'
+import CreateProduct from '../components/CreateProduct/CreateProduct'
 
-export const CreateProductPage = () => {
+export default function CreateProductPage() {
   return (
-    <div>page</div>
+    <div>
+        <CreateProduct/>
+    </div>
   )
 }
