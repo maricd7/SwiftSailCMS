@@ -30,7 +30,6 @@ export default function Login({
 
   const signUp = async (formData: FormData) => {
     'use server'
-    console.log('heheheh')
     console.log('email', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
     const origin = headers().get('origin')
     const email = formData.get('email') as string

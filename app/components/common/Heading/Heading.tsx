@@ -2,6 +2,7 @@ import React from 'react';
 
 interface InputProps {
   text: string;
+  
 }
 
 export const Heading: React.FC<InputProps> = ({ text }) => {
