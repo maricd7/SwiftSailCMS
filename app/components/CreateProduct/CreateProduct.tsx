@@ -11,19 +11,20 @@ const CreateProduct: React.FC = () => {
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-
-  
+  const [image,setImageURL] = useState('')
+  const [productCreationStatus, setProductCreationStatus] = useState('')
     const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const { data, error } = await supabase
       .from('products')
-      .insert([{ name: productName, price: parseInt(price), description }]);
+      .insert([{ name: productName, price: parseInt(price), description, image }]);
 
     if (error) {
       console.error('Error adding product:', error.message);
     } else {
       console.log('Product added successfully:', data);
+      setProductCreationStatus('Product added successfully!');
     }
   };
 
@@ -46,10 +47,16 @@ const CreateProduct: React.FC = () => {
           type='string'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
         />
+        <Input
+          placeholder="Image URL"
+          type='string'
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImageURL(e.target.value)}
+        />
         <button type="submit" className='bg-blue-500 text-white px-4 py-2 rounded w-full'>
           Create a Product
         </button>
       </form>
+      {productCreationStatus && <div className='color:green'>{productCreationStatus}</div>}
     </div>
   );
 };
