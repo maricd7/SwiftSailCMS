@@ -5,6 +5,9 @@ export default function Products() {
   return (
     <div>
         <Heading text='Products Overview'/>
+        <div>
+            
+        </div>
     </div>
   )
 }
