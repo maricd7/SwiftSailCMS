@@ -14,6 +14,7 @@ const CreateProduct: React.FC = () => {
   const [description, setDescription] = useState('');
   const [image,setImageURL] = useState('')
   const [productCreationStatus, setProductCreationStatus] = useState('')
+  const [statusTextColor, setStatusTextColor]= useState('text-lime-500')
     const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -23,9 +24,12 @@ const CreateProduct: React.FC = () => {
 
     if (error) {
       console.error('Error adding product:', error.message);
+      setProductCreationStatus(error.message)
+      setStatusTextColor('text-red-500')
     } else {
       console.log('Product added successfully:', data);
       setProductCreationStatus('Product added successfully!');
+      setStatusTextColor('text-lime-500')
     }
   };
 
@@ -55,7 +59,7 @@ const CreateProduct: React.FC = () => {
         />
         <CtaButton type='submit' text='Create a product'/>
       </form>
-      {productCreationStatus && <div className='color:green'>{productCreationStatus}</div>}
+      {productCreationStatus && <div className={statusTextColor}>{productCreationStatus}</div>}
     </div>
   );
 };
