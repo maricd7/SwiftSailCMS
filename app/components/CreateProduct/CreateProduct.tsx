@@ -4,6 +4,7 @@ import { Input } from '../common/Input/Input';
 import { Heading } from '../common/Heading/Heading';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@supabase/supabase-js';
+import { CtaButton } from '../common/Button/CtaButton';
 
 const CreateProduct: React.FC = () => {
   const supabase: SupabaseClient = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!,   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,);
@@ -52,9 +53,7 @@ const CreateProduct: React.FC = () => {
           type='string'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImageURL(e.target.value)}
         />
-        <button type="submit" className='bg-blue-500 text-white px-4 py-2 rounded w-full'>
-          Create a Product
-        </button>
+        <CtaButton type='submit' text='Create a product'/>
       </form>
       {productCreationStatus && <div className='color:green'>{productCreationStatus}</div>}
     </div>

@@ -8,7 +8,8 @@ export const Sidebar = () => {
       <p className='text-slate-900 text-lg'>Admin Tools</p>
           <div className='mt-8 flex flex-col gap-4'>
                 <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/create-product'>Create Product</Link></div>
-                <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/products'>Products</Link></div>
+                {/* <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/products'>Products</Link></div> */}
+                <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/orders'>Orders</Link></div>
           </div>
     </div>
   )
