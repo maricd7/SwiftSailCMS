@@ -1,8 +1,15 @@
 import React from 'react'
+import OrdersTable from '../components/OrdersTable/OrdersTable'
+import { ProductContextProvider } from '../contexts/ProductsContext'
+
 
 const Orders = () => {
   return (
-    <div>Orders</div>
+    <ProductContextProvider>
+      <div>
+        <OrdersTable/>
+      </div>
+    </ProductContextProvider>
   )
 }
 

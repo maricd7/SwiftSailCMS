@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useEffect, useState, ReactNode } from 'react';
+import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
 import supabase from '../supabase';
 
 interface Product {
@@ -46,4 +46,15 @@ export const ProductContextProvider: React.FC<{ children: ReactNode }> = ({ chil
       {children}
     </ProductsContext.Provider>
   );
+};
+
+export const useProductContext = () => {
+  const productContext = useContext(ProductsContext);
+
+  if (!productContext) {
+    throw new Error(
+      "No ProductContext.Provider found when calling useProductContext."
+    );
+  }
+  return productContext;
 };
