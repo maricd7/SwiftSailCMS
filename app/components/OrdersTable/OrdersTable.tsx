@@ -1,12 +1,14 @@
 'use client'
-import { ProductContextProvider, useProductContext } from '@/app/contexts/ProductsContext';
+import {useProductContext } from '@/app/contexts/ProductsContext';
 import supabase from '@/app/supabase'
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 
 const OrdersTable = () => {
     const [orders,setOrders] = useState<any[]>([]);
     const { products } = useProductContext();
-    console.log(products, 'products')
+    const[orderedProducts, setOrderedProducts] = useState<any[]>([])
+
+  
     useEffect(() => {
         async function fetchData() {
           try {
@@ -14,14 +16,22 @@ const OrdersTable = () => {
             if (error) {
               throw error;
             }
-            setOrders(data);
-            console.log(data, 'data')
+            setOrders(data)
+
           } catch (error) {
             console.error("Error fetching data:");
           }
         }
         fetchData();
-      }, []);
+      }, [])
+      useEffect(() => {
+        const orderIds = orders.map((order) => order.product_id);
+    
+        const filteredProducts = products.filter((product) => orderIds.includes(product.id));
+    
+        setOrderedProducts(filteredProducts);
+      }, [orders, products]);
+      console.log('orderovani produkti', orderedProducts)
   return (
     <div>
 
