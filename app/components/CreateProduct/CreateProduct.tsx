@@ -12,6 +12,7 @@ const CreateProduct: React.FC = () => {
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+  const [category,setCategory] = useState('')
   const [image,setImageURL] = useState('')
   const [productCreationStatus, setProductCreationStatus] = useState('')
   const [statusTextColor, setStatusTextColor]= useState('text-lime-500')
@@ -20,7 +21,7 @@ const CreateProduct: React.FC = () => {
 
     const { data, error } = await supabase
       .from('products')
-      .insert([{ name: productName, price: parseInt(price), description, image }]);
+      .insert([{ name: productName, price: parseInt(price), description, image , category }]);
 
     if (error) {
       console.error('Error adding product:', error.message);
@@ -52,6 +53,12 @@ const CreateProduct: React.FC = () => {
           type='string'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
         />
+        <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}>
+          <option>TV</option>
+          <option>Phone</option>
+          <option>Monitor</option>
+          <option>Mouse</option>
+        </select>
         <Input
           placeholder="Image URL"
           type='string'

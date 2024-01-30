@@ -31,7 +31,6 @@ const OrdersTable = () => {
     
         setOrderedProducts(filteredProducts);
       }, [orders, products]);
-      console.log('orderovani produkti', orderedProducts)
   return (
     <div>
 
