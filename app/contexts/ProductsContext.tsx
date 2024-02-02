@@ -23,7 +23,6 @@ export const ProductContextProvider: React.FC<{ children: ReactNode }> = ({ chil
     async function fetchData() {
       try {
         const { data, error } = await supabase.from('products').select('*');
-
         if (error) {
           throw error;
         }
