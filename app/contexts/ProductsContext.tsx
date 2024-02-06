@@ -3,9 +3,11 @@ import React, { createContext, useEffect, useState, ReactNode, useContext } from
 import supabase from '../supabase';
 
 interface Product {
+  id:number;
   name: string;
   price: string;
   description: string;
+  image:string;
 }
 
 interface ProductsContextProps {

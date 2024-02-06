@@ -11,7 +11,7 @@ export default function Products() {
       <Heading text='Products Overview' />
       <div>
         <ProductContextProvider>
-        <ProductsOverview/>
+          <ProductsOverview/>
         </ProductContextProvider>
       </div>
     </div>

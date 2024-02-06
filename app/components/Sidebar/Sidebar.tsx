@@ -7,9 +7,9 @@ export const Sidebar = () => {
       <Link href='/dashboard'><h4 className='text-slate-900 text-2xl font-semibold'>SwiftSail CMS</h4></Link>
       <p className='text-slate-900 text-lg'>Admin Tools</p>
           <div className='mt-8 flex flex-col gap-4'>
-                <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/create-product'>Create Product</Link></div>
-                {/* <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/products'>Products</Link></div> */}
-                <div className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'><Link href='/orders'>Orders</Link></div>
+                <Link href='/create-product' className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Create Product</Link>
+                <Link  href='/orders' className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Orders</Link>
+                <Link  href='/products' className='border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Products</Link>
           </div>
     </div>
   )
