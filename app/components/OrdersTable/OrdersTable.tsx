@@ -6,9 +6,8 @@ import React, { useEffect, useState } from "react";
 const OrdersTable = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const { products } = useProductContext();
-  const [orderedProducts, setOrderedProducts] = useState<any[]>([]);
-  const [qty,setQty] = useState(null)
- 
+  const [tableData, setTableData] = useState<any[]>([]);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -18,42 +17,63 @@ const OrdersTable = () => {
         if (error) {
           throw error;
         }
-        setOrders(data)
+        setOrders(data);
       } catch (error) {
         console.error("Error fetching data:");
       }
     }
     fetchData();
-  }, [orders]);
+  }, []);
 
   useEffect(() => {
-    const orderIds = orders.map((order) => order.product_id);
-    const filteredProducts = products.filter((product) =>
-      orderIds.includes(product.id)
-    );
-    setOrderedProducts(filteredProducts);
+    const updatedTableData = orders.map((order) => {
+      const product = products.find((product) => product.id === order.product_id);
+      return {
+        orderId: order.id,
+        productName: product ? product.name : "Product Not Found",
+        quantity: order.quantity,
+        orderDate: order.created_at,
+        productPrice:product ? product.price : "Price Not Found",
+      };
+    });
+    setTableData(updatedTableData);
   }, [orders, products]);
- 
+
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <th scope="col" className="px-6 py-3">Order Id</th>
-          <th scope="col" className="px-6 py-3">Product</th>
-          <th scope="col" className="px-6 py-3">Quantity</th>
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Order Id
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Product
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Quantity
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Order Date
+            </th>
+            <th scope="col" className="px-6 py-3">
+             Order Price
+            </th>
+          </tr>
         </thead>
         <tbody>
-        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td scope="row" className="px-6 py-4">
-                    Apple MacBook Pro 17"
-                </td>
-                <td className="px-6 py-4">
-                    Silver
-                </td>
-                <td className="px-6 py-4">
-                    Laptop
-                </td>
+          {tableData.map((item, index) => (
+            <tr
+              key={index}
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
+              <td className="px-6 py-4">{item.orderId}</td>
+              <td className="px-6 py-4">{item.productName}</td>
+              <td className="px-6 py-4">{item.quantity}</td>
+              <td className="px-6 py-4">{item.orderDate}</td>
+              <td className="px-6 py-4">{item.productPrice * item.quantity}</td>
             </tr>
+          ))}
         </tbody>
       </table>
     </div>
