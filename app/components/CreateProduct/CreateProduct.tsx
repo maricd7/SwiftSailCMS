@@ -53,7 +53,7 @@ const CreateProduct: React.FC = () => {
           type='string'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
         />
-        <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}>
+        <select className='text-slate-950' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}>
           <option>TV</option>
           <option>Phone</option>
           <option>Monitor</option>
