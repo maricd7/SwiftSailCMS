@@ -9,6 +9,7 @@ interface Product {
   description: string;
   image:string;
   stock:number;
+  sold:number;
 }
 
 

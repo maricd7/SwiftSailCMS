@@ -11,7 +11,7 @@ export const Sidebar = () => {
       <Link href='/dashboard'><h4 className='text-slate-900 text-2xl font-semibold'>SwiftSail CMS</h4></Link>
       <p className='text-slate-900 text-lg'>Admin Tools</p>
           <div className='mt-8 flex flex-col gap-4'>
-                <Sidebarlink  href='/' icon='carbon-home' text='Overview'/>
+                <Sidebarlink  href='/dashboard' icon='carbon-home' text='Overview'/>
                 <Sidebarlink  href='/create-product' icon="carbon:intent-request-create" text='Create Product'/>
                 <Sidebarlink  href='/orders' icon="carbon:shopping-cart-plus" text='Orders'/>
                 <Sidebarlink  href='/products' icon="carbon:box" text='Products'/>

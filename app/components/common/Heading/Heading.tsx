@@ -6,5 +6,5 @@ interface InputProps {
 }
 
 export const Heading: React.FC<InputProps> = ({ text }) => {
-  return <h1 className='text-4xl text-white font-bold'>{text}</h1>
+  return <h1 className='text-4xl text-slate-950 font-bold'>{text}</h1>
 };

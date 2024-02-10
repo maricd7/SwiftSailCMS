@@ -7,7 +7,7 @@ import OverviewBoxes from '../components/common/OverviewBoxes/OverviewBoxes'
 
 export default function Dashboard() {
   return (
-    <div className=' w-full h-screen flex gap-8'>
+    <div className=' w-full h-screen flex gap-8 flex-col'>
       <ProductContextProvider>
         <Heading text='Welcome to dashboard'/>
         <OverviewBoxes/>
