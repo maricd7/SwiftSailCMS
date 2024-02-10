@@ -1,5 +1,8 @@
+'use client'
+import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import React from 'react'
+import Sidebarlink from '../common/Link/Sidebarlink'
 
 export const Sidebar = () => {
   return (
@@ -7,11 +10,12 @@ export const Sidebar = () => {
       <Link href='/dashboard'><h4 className='text-slate-900 text-2xl font-semibold'>SwiftSail CMS</h4></Link>
       <p className='text-slate-900 text-lg'>Admin Tools</p>
           <div className='mt-8 flex flex-col gap-4'>
-                <Link href='/create-product' className='text-slate-950 border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Create Product</Link>
-                <Link  href='/orders' className='text-slate-950 border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Orders</Link>
-                <Link  href='/products' className='text-slate-950 border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Products</Link>
-                <Link  href='/customers' className='text-slate-950 border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Customers</Link>
-                <Link  href='/inventory' className='text-slate-950 border-b-2 border-slate-900 cursor-pointer hover:scale-1.2'>Inventory</Link>  
+                <Sidebarlink href='/' icon='carbon-home' text='Overview'/>
+                <Sidebarlink href='/create-product' icon="carbon:intent-request-create" text='Create Product'/>
+                <Sidebarlink href='/orders' icon="carbon:shopping-cart-plus" text='Orders'/>
+                <Sidebarlink href='/products' icon="carbon:box" text='Products'/>
+                <Sidebarlink href='/customers' icon="carbon:user-multiple" text='Customers'/>
+                <Sidebarlink href='/inventory' icon="carbon:inventory-management" text='Inventory'/>
           </div>
     </div>
   )

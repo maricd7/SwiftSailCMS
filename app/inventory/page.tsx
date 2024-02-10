@@ -1,9 +1,12 @@
 import React from 'react'
 import {InventoryTable} from '../components/InventoryTable'
+import { ProductContextProvider } from '../contexts/ProductsContext'
 function Inventory() {
   return (
     <div>
-        <InventoryTable/>
+        <ProductContextProvider>
+            <InventoryTable/>
+        </ProductContextProvider>
     </div>
   )
 }
