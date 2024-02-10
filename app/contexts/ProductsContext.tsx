@@ -8,7 +8,9 @@ interface Product {
   price: string;
   description: string;
   image:string;
+  stock:number;
 }
+
 
 interface ProductsContextProps {
   products: Product[];
