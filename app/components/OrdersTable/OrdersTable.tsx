@@ -63,7 +63,7 @@ const OrdersTable = () => {
         </thead>
         <tbody>
           {tableData.map((item, index) => (
-            <tr
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               key={index}
              >
               <td className="px-6 py-4">{item.orderId}</td>
