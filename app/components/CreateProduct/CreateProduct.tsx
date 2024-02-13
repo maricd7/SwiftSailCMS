@@ -6,6 +6,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@supabase/supabase-js';
 import { CtaButton } from '../common/Button/CtaButton';
 
+
 const CreateProduct: React.FC = () => {
   const supabase: SupabaseClient = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!,   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,);
 
@@ -14,6 +15,7 @@ const CreateProduct: React.FC = () => {
   const [description, setDescription] = useState('');
   const [category,setCategory] = useState('')
   const [image,setImageURL] = useState('')
+  const [discount,setDiscount] = useState('')
   const [productCreationStatus, setProductCreationStatus] = useState('')
   const [statusTextColor, setStatusTextColor]= useState('text-lime-500')
     const handleSubmit = async (event: React.FormEvent) => {
@@ -21,7 +23,7 @@ const CreateProduct: React.FC = () => {
 
     const { data, error } = await supabase
       .from('products')
-      .insert([{ name: productName, price: parseInt(price), description, image , category }]);
+      .insert([{ name: productName, price: parseInt(price), description, image , category, discount }]);
 
     if (error) {
       console.error('Error adding product:', error.message);
@@ -52,6 +54,11 @@ const CreateProduct: React.FC = () => {
           placeholder="Description"
           type='string'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+        />
+        <Input
+          placeholder="Discount"
+          type="number"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDiscount(e.target.value)}
         />
         <select className='text-slate-950' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}>
           <option>TV</option>
