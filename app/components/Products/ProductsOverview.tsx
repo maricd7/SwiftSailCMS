@@ -10,8 +10,9 @@ const ProductsOverview = () => {
   const [editProductId, setEditProductId] = useState(0);
   const { products } = useProductContext();
   const [newProductName, setNewProductName] = useState("");
-  const [newPrice, setNewPrice] = useState(""); // State for new price
-  const [newDescription, setNewDescription] = useState(""); // State for new description
+  const [newPrice, setNewPrice] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newDiscount, setNewDiscount] = useState("");
 
   async function deleteProduct(id: number) {
     const { error } = await supabase.from("products").delete().eq("id", id);
@@ -24,26 +25,14 @@ const ProductsOverview = () => {
       .eq("id", id);
   }
 
-  async function changeProductName(id: number, newName: string) {
+  async function editProduct(id: number, newName: string, newPrice: string, newDescription: string, newDiscount: string) {
     const { error } = await supabase
       .from("products")
-      .upsert({ id: id, name: newName })
+      .upsert({ id: id, name: newName, price: newPrice, description: newDescription, discount: newDiscount })
       .eq("id", id);
   }
 
-  async function changeProductPrice(id: number, newPrice: string) {
-    const { error } = await supabase
-      .from("products")
-      .upsert({ id: id, price: newPrice })
-      .eq("id", id);
-  }
 
-  async function changeProductDescription(id: number, newDescription: string) {
-    const { error } = await supabase
-      .from("products")
-      .upsert({ id: id, description: newDescription })
-      .eq("id", id);
-  }
 
   return (
     <div className="container mx-auto my-8 px-4">
@@ -51,7 +40,7 @@ const ProductsOverview = () => {
         {products.map((product) => (
           <div
             key={product.name}
-            className="bg-white p-4 shadow-md rounded-md flex flex-col gap-4"
+            className="bg-white p-4 shadow-md rounded-md flex flex-col gap-4 text-slate-950"
           >
             <img
               src={product.image}
@@ -59,15 +48,16 @@ const ProductsOverview = () => {
               alt="Product Image"
             />
             {editProductId === product.id && (
-                  <EditProduct
-                    productId={product.id}
-                    setEditProductId={setEditProductId}
-                    changeProductName={changeProductName}
-                    setNewProductName={setNewProductName}
-                    setNewPrice={setNewPrice}
-                    setNewDescription={setNewDescription}
-                  />
-                )}
+              <EditProduct
+                productId={product.id}
+                setEditProductId={setEditProductId}
+                setNewProductName={setNewProductName}
+                setNewPrice={setNewPrice}
+                setNewDescription={setNewDescription}
+                setNewDiscount={setNewDiscount}
+                editProduct={editProduct}
+              />
+            )}
             <div>
               <div className="flex items-center gap-4">
                 <p className="text-lg font-semibold">Name: {product.name}</p>
@@ -79,7 +69,7 @@ const ProductsOverview = () => {
                   style={{ color: "000" }}
                 />
               </div>
-              <p className="text-gray-700">Price:${product.price}</p>
+              <p className="text-gray-700">Price: ${product.price}</p>
               <p className="text-gray-700">Description: {product.description}</p>
               <button
                 className="border-2 border-red-700 text-red-700 rounded-md py-1 px-2 mt-2"
