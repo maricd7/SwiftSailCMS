@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <AuthContextProvider>
       <html lang="en" className={GeistSans.className}>
-        <body className="bg-gray-200 text-foreground ml-72 mt-8">
-          <main className="m-0 flex items-start justify-start">{children}</main>
+        <body className="bg-gray-200 text-foreground mt-8">
+          <main className="m-0 flex items-start justify-center">
+            {children}
+          </main>
         </body>
       </html>
     </AuthContextProvider>

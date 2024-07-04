@@ -5,12 +5,15 @@ import React, {
   ReactNode,
   useEffect,
   useState,
+  Dispatch,
+  SetStateAction,
 } from "react";
 import supabase from "../supabase";
 import { useRouter } from "next/navigation";
 
 interface AuthContextProps {
   currentUser: {};
+  setSignedIn: Dispatch<SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -19,6 +22,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [currentUser, setCurrentUser] = useState<any>();
+  const [userSignedIn, setSignedIn] = useState<boolean>(false);
   const router = useRouter();
   useEffect(() => {
     const getUser = async () => {
@@ -27,6 +31,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       } = await supabase.auth.getUser();
       if (user) {
         setCurrentUser(user);
+        setSignedIn(true);
       } else {
         router.push("/login");
       }
@@ -36,9 +41,10 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     // };
     // logoutUser();
     getUser();
-  }, []);
+  }, [userSignedIn]);
   const contextValue: AuthContextProps = {
     currentUser: currentUser,
+    setSignedIn: setSignedIn,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
