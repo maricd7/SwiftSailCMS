@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "../globals.css";
+import { AuthContextProvider } from "../contexts/AuthContext";
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-gray-200 text-foreground ml-72 mt-8">
-        <main className="m-0 flex items-start justify-start">{children}</main>
-      </body>
-    </html>
+    <AuthContextProvider>
+      <html lang="en" className={GeistSans.className}>
+        <body className="bg-gray-200 text-foreground ml-72 mt-8">
+          <main className="m-0 flex items-start justify-start">{children}</main>
+        </body>
+      </html>
+    </AuthContextProvider>
   );
 }
