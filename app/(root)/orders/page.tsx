@@ -5,9 +5,7 @@ import { ProductContextProvider } from "@/app/contexts/ProductsContext";
 const Orders = () => {
   return (
     <ProductContextProvider>
-      <div>
-        <OrdersTable />
-      </div>
+      <OrdersTable />
     </ProductContextProvider>
   );
 };
