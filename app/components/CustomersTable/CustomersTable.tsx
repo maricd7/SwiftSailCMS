@@ -19,6 +19,17 @@ export const CustomersTable = () => {
     }
     fetchData();
   }, []);
+
+  //customer filter function
+
+  const filterByLoyalty = () => {
+    const customersByLoyalty = customers
+      .filter((customer) => customer.loyalty)
+      .sort((a, b) => b.loyalty - a.loyalty);
+
+    setCustomers(customersByLoyalty);
+  };
+
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -41,7 +52,13 @@ export const CustomersTable = () => {
           <th scope="col" className="px-6 py-3">
             Postal Code
           </th>
-          <th scope="col" className="px-6 py-3">
+          <th
+            onClick={() => {
+              filterByLoyalty();
+            }}
+            scope="col"
+            className="px-6 py-3 cursor-pointer"
+          >
             Loyalty Discount
           </th>
         </thead>
@@ -57,7 +74,7 @@ export const CustomersTable = () => {
               <td className="px-6 py-4">{customer.phone}</td>
               <td className="px-6 py-4">{customer.address}</td>
               <td className="px-6 py-4">{customer.postal_code}</td>
-              <td className="px-6 py-4">{customer.loyalty}%</td>
+              <td className="px-6 py-4">{customer.loyalty}</td>
             </tr>
           ))}
         </tbody>
