@@ -46,6 +46,11 @@ export const Sidebar = () => {
           icon="carbon:inventory-management"
           text="Inventory"
         />
+        <Sidebarlink
+          href="/customer-tiers"
+          icon="carbon:trophy"
+          text="Customer Tiers"
+        />
         <div
           onClick={() => {
             handleSignOut;
