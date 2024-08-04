@@ -1,7 +1,59 @@
-import React from "react";
+"use client";
+import supabase from "@/app/supabase";
+import React, { useEffect, useState } from "react";
 
 const CustomerTiers = () => {
-  return <div>CustomerTiers</div>;
+  const [loyalty, setLoyalty] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data, error } = await supabase
+          .from("customers")
+          .select("id, loyalty");
+        if (error) {
+          throw error;
+        }
+        setLoyalty(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h1>Customer Tiers</h1>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Customer ID
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Loyalty Points
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Tier
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {loyalty.map((customer) => (
+            <tr
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              key={customer.id}
+            >
+              <td className="px-6 py-4">{customer.id}</td>
+              <td className="px-6 py-4">{customer.loyalty}</td>
+              <td className="px-6 py-4">{customer.tier}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default CustomerTiers;
