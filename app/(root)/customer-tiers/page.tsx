@@ -4,17 +4,19 @@ import React, { useEffect, useState } from "react";
 
 const CustomerTiers = () => {
   const [loyalty, setLoyalty] = useState<any[]>([]);
+  const [customerTier, setCustomerTier] = useState<number[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const { data, error } = await supabase
           .from("customers")
-          .select("id, loyalty");
+          .select("id, loyalty,customer_tier");
         if (error) {
           throw error;
         }
         setLoyalty(data);
+        updateCustomerTier(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -22,6 +24,19 @@ const CustomerTiers = () => {
     fetchData();
   }, []);
 
+  const updateCustomerTier = async (loyalty: any) => {
+    for (const customer of loyalty) {
+      let newCustomerTier = customer.loyalty / 10;
+      const { error } = await supabase
+        .from("customers")
+        .update({ customer_tier: newCustomerTier.toFixed() })
+        .eq("id", customer.id);
+
+      if (error) {
+        console.error("Error updating customer tier:", error);
+      }
+    }
+  };
   return (
     <div>
       <h1>Customer Tiers</h1>
@@ -47,7 +62,7 @@ const CustomerTiers = () => {
             >
               <td className="px-6 py-4">{customer.id}</td>
               <td className="px-6 py-4">{customer.loyalty}</td>
-              <td className="px-6 py-4">{customer.tier}</td>
+              <td className="px-6 py-4">{customer.customer_tier}</td>
             </tr>
           ))}
         </tbody>
